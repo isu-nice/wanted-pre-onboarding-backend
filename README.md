@@ -33,6 +33,8 @@
 
 ## ERD
 
+![wanted_db_diagram](https://github.com/user-attachments/assets/62bc10c9-842a-416a-9aea-6881c48288a8)
+
 
 
 ## 프로젝트 구조
