@@ -30,6 +30,7 @@
 - Spring Data JPA
 - QueryDSL
 - MySQL
+- Swagger
 
 ## ERD
 
@@ -99,3 +100,7 @@ wanted.pre_onboarding
 
 
 ## API 문서
+
+swagger 활용 (http://localhost:8080/swagger-ui/index.html)
+
+
