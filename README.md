@@ -31,30 +31,69 @@
 - QueryDSL
 - MySQL
 
+## ERD
+
+
+
 ## 프로젝트 구조
 ```markdown
 wanted.pre_onboarding
 ├── application
 │   ├── controller
+│   │   ├── ApplicationController              # 지원 관련 API 엔드포인트
 │   ├── dto
+│   │   ├── ApplicationDto                     # 지원 관련 DTO
 │   ├── entity
-│   ├── mapper
+│   │   ├── Application                        # 지원 엔티티
 │   ├── repository
+│   │   ├── ApplicationRepository              # 지원 관련 레포지토리
 │   └── service
+│       ├── ApplicationService                # 지원 관련 서비스
+├── company
+│   ├── entity
+│   │   ├── Company                         # 회사 엔티티
+│   ├── repository
+│   │   ├── CompanyRepository               # 회사 레포지토리
+│   └── service
+│       ├── CompanyService                 # 회사 관련 서비스
 ├── jobPosting
 │   ├── controller
+│   │   ├── JobPostingController              # 채용공고 관련 API 엔드포인트
 │   ├── dto
+│   │   ├── JobPostingDetailsDto              # 채용공고 상세 DTO
+│   │   ├── JobPostingPatchDto                # 채용공고 수정 DTO
+│   │   ├── JobPostingPostDto                 # 채용공고 등록 DTO
+│   │   ├── JobPostingsResponseDto            # 채용공고 목록 DTO
 │   ├── entity
+│   │   ├── JobPosting                        # 채용공고 엔티티
 │   ├── mapper
+│   │   ├── JobPostingMapper                  # 채용공고 관련 매퍼
 │   ├── repository
+│   │   ├── JobPostingRepository               # 채용공고 레포지토리
+│   │   ├── JobPostingRepositoryCustom        # 커스텀 쿼리 메소드
+│   │   ├── JobPostingRepositoryImpl          # 커스텀 쿼리 구현
 │   └── service
+│       ├── JobPostingService                 # 채용공고 관련 서비스
 └── user
-    ├── controller
-    ├── dto
     ├── entity
-    ├── mapper
+    │   ├── User                             # 사용자 엔티티
     ├── repository
+    │   ├── UserRepository                   # 사용자 레포지토리
     └── service
+        ├── UserService                     # 사용자 관련 서비스
+├── config
+│   ├── QueryDSLConfig                       # QueryDSL 설정 클래스
+├── exception
+│   ├── advice
+│   │   ├── JGlobalExceptionAdvice           # 전역 예외 처리 어드바이스
+│   ├── util
+│   │   ├── ErrorResponder
+│   │   ├── ErrorResponse
+│   │   ├── JsonUtil                          # JSON 유틸리티 클래스
+│   ├──  BusinessLogicException               # 비즈니스 로직 예외 클래스
+│   ├──  ExceptionCode                        # 예외 코드 
+
 ```
+
 
 ## API 문서
