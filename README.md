@@ -24,6 +24,8 @@
   - [x] 필드 유효성 검증 및 제약 조건 위반 에러를 포함한 응답 정보를 생성하는 기능
   - [x] BindingResult와 ConstraintViolation을 처리하여, 발생한 오류에 대한 상세 정보를 포함하는 JSON 응답을 생성
 
+
+
 ## 기술 스택
 - Java 17
 - Spring Boot 3.2.8
@@ -31,6 +33,7 @@
 - QueryDSL
 - MySQL
 - Swagger
+
 
 ## ERD
 
@@ -99,8 +102,11 @@ wanted.pre_onboarding
 ```
 
 
+
 ## API 문서
 
 swagger 활용 (http://localhost:8080/swagger-ui/index.html)
+
+<img width="624" alt="스크린샷 2024-08-03 오후 6 28 28" src="https://github.com/user-attachments/assets/02f9ee07-76b4-4d78-bf54-0bb49d330742">
 
 
