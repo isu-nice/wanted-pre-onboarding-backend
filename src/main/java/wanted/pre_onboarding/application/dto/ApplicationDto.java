@@ -10,7 +10,7 @@ import lombok.Getter;
 public class ApplicationDto {
 
     @NotNull
-    private Long useㅁrId;
+    private Long userId;
 
     @NotNull
     private Long jobPostingId;
