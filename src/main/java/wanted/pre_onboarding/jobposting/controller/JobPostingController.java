@@ -1,5 +1,7 @@
 package wanted.pre_onboarding.jobposting.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +14,15 @@ import wanted.pre_onboarding.jobposting.service.JobPostingService;
 
 import java.util.List;
 
+@Tag(name = "JobPosting", description = "채용공고 관련 API")
 @RestController
-@RequestMapping("/job-postings")
+@RequestMapping("/wanted/job-postings")
 @AllArgsConstructor
 public class JobPostingController {
 
     private final JobPostingService jobPostingService;
 
+    @Operation(summary = "채용공고 등록")
     @PostMapping
     public ResponseEntity registerJobPosting(@RequestBody JobPostingPostDto postDto) {
         jobPostingService.registerJobPosting(postDto);
@@ -26,6 +30,7 @@ public class JobPostingController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @Operation(summary = "채용공고 수정")
     @PatchMapping("/{id}")
     public ResponseEntity updateJobPosting(
             @PathVariable Long id,
@@ -36,7 +41,7 @@ public class JobPostingController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    @Operation(summary = "채용공고 삭제")
     @DeleteMapping("/{id}")
     public ResponseEntity deleteJobPosting(@PathVariable Long id) {
         jobPostingService.deleteJobPosting(id);
@@ -44,26 +49,27 @@ public class JobPostingController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping // 목록 조회
+    @Operation(summary = "전체 채용공고 목록 조회")
+    @GetMapping
     public ResponseEntity getAllJobPostings() {
         List<JobPostingsResponseDto> response = jobPostingService.findAllJobPostings();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/search") // 검색
+    @Operation(summary = "채용공고 키워드 검색")
+    @GetMapping("/search")
     public ResponseEntity searchJobPostings(@RequestParam String query) {
         List<JobPostingsResponseDto> response = jobPostingService.searchJobPostingsByKeyword(query);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}") // 상세 페이지 조회
+    @Operation(summary = "채용공고 상세 조회")
+    @GetMapping("/{id}")
     public ResponseEntity getJobPosting(@PathVariable Long id) {
         JobPostingDetailsDto response = jobPostingService.findJobPostingDetails(id);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
 }
