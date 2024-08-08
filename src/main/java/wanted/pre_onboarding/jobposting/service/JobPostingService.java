@@ -125,7 +125,7 @@ public class JobPostingService {
      * @param reward 보상금
      * @throws BusinessLogicException 보상금이 10만 원 미만일 때
      */
-    private void validateReward(Long reward) {
+    public void validateReward(Long reward) {
         if (reward < MINIMUM_REWARD) {
             throw new BusinessLogicException(REWARD_TOO_LOW);
         }
