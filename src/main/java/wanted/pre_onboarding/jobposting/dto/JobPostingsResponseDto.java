@@ -1,10 +1,13 @@
 package wanted.pre_onboarding.jobposting.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
+
 @Getter
+@Builder
+@AllArgsConstructor
 public class JobPostingsResponseDto {
     private Long jobPostingId;
     private String companyName;
