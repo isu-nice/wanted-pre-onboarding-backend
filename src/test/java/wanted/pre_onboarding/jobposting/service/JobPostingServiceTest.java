@@ -7,17 +7,22 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import wanted.pre_onboarding.company.entity.Company;
 import wanted.pre_onboarding.company.service.CompanyService;
+import wanted.pre_onboarding.exception.BusinessLogicException;
 import wanted.pre_onboarding.jobposting.dto.JobPostingDetailsDto;
 import wanted.pre_onboarding.jobposting.dto.JobPostingPatchDto;
 import wanted.pre_onboarding.jobposting.dto.JobPostingPostDto;
+import wanted.pre_onboarding.jobposting.dto.JobPostingsResponseDto;
 import wanted.pre_onboarding.jobposting.entity.JobPosting;
 import wanted.pre_onboarding.jobposting.mapper.JobPostingMapper;
 import wanted.pre_onboarding.jobposting.repository.JobPostingRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static wanted.pre_onboarding.exception.ExceptionCode.JOB_POSTING_NOT_FOUND;
+import static wanted.pre_onboarding.exception.ExceptionCode.REWARD_TOO_LOW;
 
 
 class JobPostingServiceTest {
@@ -96,6 +101,22 @@ class JobPostingServiceTest {
         assertEquals(jobPosting, result);
         verify(companyService, times(1)).findCompanyById(postDto.getCompanyId());
         verify(jobPostingMapper, times(1)).postDtoToJobPosting(postDto);
+        verify(repository, times(1)).save(jobPosting);
+    }
+
+    @Test
+    void updateJobPosting_successfulUpdate() {
+        // given
+        when(repository.findById(jobPosting.getId())).thenReturn(Optional.of(jobPosting));
+        when(repository.save(jobPosting)).thenReturn(jobPosting);
+
+        // when
+        jobPostingService.updateJobPosting(jobPosting.getId(), patchDto);
+
+        // then
+        assertEquals(patchDto.getPosition(), jobPosting.getPosition());
+        assertEquals(patchDto.getReward(), jobPosting.getReward());
+        verify(repository, times(1)).findById(jobPosting.getId());
         verify(repository, times(1)).save(jobPosting);
     }
 
