@@ -120,5 +120,19 @@ class JobPostingServiceTest {
         verify(repository, times(1)).save(jobPosting);
     }
 
+    @Test
+    void updateJobPosting_jobPostingNotFound() {
+        // given
+        when(repository.findById(jobPosting.getId())).thenReturn(Optional.empty());
+
+        // when & then
+        BusinessLogicException thrownException = assertThrows(BusinessLogicException.class, () -> jobPostingService.updateJobPosting(jobPosting.getId(), patchDto));
+        assertEquals(JOB_POSTING_NOT_FOUND, thrownException.getExceptionCode());
+        verify(repository, times(1)).findById(jobPosting.getId());
+        verify(repository, never()).save(any(JobPosting.class));
+    }
+
+
+
 
 }
