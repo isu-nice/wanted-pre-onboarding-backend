@@ -133,6 +133,18 @@ class JobPostingServiceTest {
     }
 
 
+    @Test
+    void deleteJobPosting_successfulDeletion() {
+        // given
+        when(repository.findById(jobPosting.getId())).thenReturn(Optional.of(jobPosting));
+
+        // when
+        jobPostingService.deleteJobPosting(jobPosting.getId());
+
+        // then
+        verify(repository, times(1)).findById(jobPosting.getId());
+        verify(repository, times(1)).delete(jobPosting);
+    }
 
 
 }
