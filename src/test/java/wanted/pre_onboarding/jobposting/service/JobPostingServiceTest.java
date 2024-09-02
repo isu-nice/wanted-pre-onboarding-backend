@@ -210,6 +210,19 @@ class JobPostingServiceTest {
         verify(jobPostingMapper, times(1)).toJobPostingDetailsDto(company, jobPosting, otherPostingIds);
     }
 
+    @Test
+    void validateReward_rewardTooLow() {
+        // when & then
+        BusinessLogicException thrownException = assertThrows(BusinessLogicException.class, () -> {
+            jobPostingService.validateReward(50_000L);
+        });
+        assertEquals(REWARD_TOO_LOW, thrownException.getExceptionCode());
+    }
 
+    @Test
+    void validateReward_successfulValidation() {
+        // when & then
+        assertDoesNotThrow(() -> jobPostingService.validateReward(150_000L));
+    }
 
 }
