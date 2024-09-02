@@ -174,5 +174,23 @@ class JobPostingServiceTest {
     }
 
 
+    @Test
+    void searchJobPostingsByKeyword_successfulSearch() {
+        // given
+        List<JobPosting> jobPostings = List.of(jobPosting);
+
+        // when
+        when(repository.searchJobPostings("Java")).thenReturn(jobPostings);
+
+        // when
+        List<JobPostingsResponseDto> result = jobPostingService.searchJobPostingsByKeyword("Java");
+
+        // then
+        assertEquals(jobPostings, result);
+        verify(repository, times(1)).searchJobPostings("Java");
+    }
+
+
+
 
 }
