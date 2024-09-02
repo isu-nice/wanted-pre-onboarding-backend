@@ -158,5 +158,21 @@ class JobPostingServiceTest {
         verify(repository, never()).delete(any(JobPosting.class));
     }
 
+    @Test
+    void findAllJobPostings_successfulFindAll() {
+        // given
+        List<JobPosting> jobPostings = List.of(jobPosting);
+
+        // when
+        when(repository.findAll()).thenReturn(jobPostings);
+
+        // when
+        List<JobPostingsResponseDto> result = jobPostingService.findAllJobPostings();
+
+        // then
+        verify(repository, times(1)).findAll();
+    }
+
+
 
 }
