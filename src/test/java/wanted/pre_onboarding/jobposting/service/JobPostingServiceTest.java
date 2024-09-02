@@ -146,5 +146,17 @@ class JobPostingServiceTest {
         verify(repository, times(1)).delete(jobPosting);
     }
 
+    @Test
+    void deleteJobPosting_jobPostingNotFound() {
+        // given
+        when(repository.findById(jobPosting.getId())).thenReturn(Optional.empty());
+
+        // when & then
+        BusinessLogicException thrownException = assertThrows(BusinessLogicException.class, () -> jobPostingService.deleteJobPosting(jobPosting.getId()));
+        assertEquals(JOB_POSTING_NOT_FOUND, thrownException.getExceptionCode());
+        verify(repository, times(1)).findById(jobPosting.getId());
+        verify(repository, never()).delete(any(JobPosting.class));
+    }
+
 
 }
