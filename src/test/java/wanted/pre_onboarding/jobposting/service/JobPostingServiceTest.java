@@ -191,6 +191,25 @@ class JobPostingServiceTest {
     }
 
 
+    @Test
+    void findJobPostingDetails_successfulFind() {
+        // given
+        List<JobPosting> otherJobPostings = List.of(jobPosting);
+        List<Long> otherPostingIds = List.of(jobPosting.getId());
+        when(repository.findById(jobPosting.getId())).thenReturn(Optional.of(jobPosting));
+        when(repository.findByCompanyId(company.getId())).thenReturn(otherJobPostings);
+        when(jobPostingMapper.toJobPostingDetailsDto(company, jobPosting, otherPostingIds)).thenReturn(detailsDto);
+
+        // when
+        JobPostingDetailsDto result = jobPostingService.findJobPostingDetails(jobPosting.getId());
+
+        // then
+        assertEquals(detailsDto, result);
+        verify(repository, times(1)).findById(jobPosting.getId());
+        verify(repository, times(1)).findByCompanyId(company.getId());
+        verify(jobPostingMapper, times(1)).toJobPostingDetailsDto(company, jobPosting, otherPostingIds);
+    }
+
 
 
 }
