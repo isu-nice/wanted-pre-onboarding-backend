@@ -46,9 +46,6 @@ public class JobPostingService {
 
     /**
      * 채용 공고 수정
-     *
-     * @param //업데이트할 채용 공고 객체
-     * @param id
      * @throws BusinessLogicException 해당 채용 공고가 존재하지 않을 때
      * @throws BusinessLogicException 보상금이 10만 원 미만일 때
      */
